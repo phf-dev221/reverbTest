@@ -18,20 +18,13 @@ class MessageEvent implements ShouldBroadcastNow
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
-    public $username;
 
     /**
      * Create a new event instance.
      */
-    public function __construct($user_id, $message)
+    public function __construct($message)
     {
-        $newMessage = new Message();
-        $newMessage->user_id = $user_id;
-        $newMessage->message = $message;
-        $newMessage->save();
-
         $this->message = $message;
-        $this->username = User::find($user_id)->name;
     }
 
     /**
@@ -41,8 +34,9 @@ class MessageEvent implements ShouldBroadcastNow
      */
     public function broadcastOn(): array
     {
+        // dd($this->message);
         return [
-            new Channel('our-channel'),
+            new PrivateChannel('our-channel.'.$this->message->receiver_id),
         ];
     }
 }
