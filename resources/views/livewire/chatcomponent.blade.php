@@ -15,7 +15,7 @@
             <!-- </div> -->
             @else
             <div class="flex items-center justify-end mb-2">
-                <div class="bg-blue-500 text-white rounded-lg p-2 shadow mr-2 max-w-sm" style="color:red;">
+                <div class="bg-blue-500 text-white rounded-lg p-2 shadow mr-2 max-w-sm bg-blue-500">
                     <p>{{$message['message']}} <b>:You</b></p> 
                 </div>
                 <img class="w-8 h-8 rounded-full" src="https://picsum.photos/50/50" alt="User Avatar">
@@ -25,7 +25,7 @@
         @endforeach
     </div>
 
-    <form wire:submit.prevent="submitMessage">
+    <form wire:submit="sendMessage()">
         <div class="bg-gray-100 px-4 py-2">
             <div class="flex items-center">
                 <input class="w-full border rounded-full py-2 px-4 mr-2" wire:model="message" type="text" placeholder="Type your message...">

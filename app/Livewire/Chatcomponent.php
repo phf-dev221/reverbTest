@@ -60,7 +60,7 @@ class Chatcomponent extends Component
         ];
     }
 
-    public function submitMessage()
+    public function sendMessage()
     {
 
         $newMessage = new Message();
@@ -73,6 +73,7 @@ class Chatcomponent extends Component
         broadcast(new MessageEvent($newMessage))->toOthers();
 
         $this->message = '';
+        
        
     }
 
